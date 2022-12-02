@@ -1,0 +1,36 @@
+{
+  "offers": [
+    {
+      "id": 100,
+      "title": "10% Off On Burger",
+      "description": "10% off on all types of burger when total bill value exceed Rs.2500",
+      "image_link": "https://www.nicepng.com/png/detail/878-8788836_bfd-burger-dbl-cheeseburger-800-x-500px-cheeseburger.png"
+    },
+    {
+      "id": 101,
+      "title": "Friday Night Pizza Offer",
+      "description": "15% off on large chicken pizza this friday. offer available for dine-in only",
+      "image_link": "https://previews.123rf.com/images/kamranaydinov/kamranaydinov1909/kamranaydinov190900597/130619381-chicken-pizza-with-tomato-bell-peppers-mushroom-and-cheese.jpg"
+    },
+    {
+      "id": 103,
+      "title": "15% Off On Submarine",
+      "description": "15% off on all types of submarine when total bill value exceed Rs.3000",
+      "image_link": "https://img.freepik.com/premium-photo/ham-cheese-salad-submarine-sandwich-from-freshly-cut-baguette_488220-55596.jpg?w=2000"
+    }
+  ],
+  "loyalty": [
+    {
+      "id": 104,
+      "title": "Free Soft Drink",
+      "description": "We are happy to let you know that you are eligible for free soft drink. Please collect your drink on your next visit",
+      "image_link": "https://thumbs.dreamstime.com/b/soda-pop-soft-drink-slim-cans-ice-background-bangkok-thailand-august-100090697.jpg"
+    },
+    {
+      "id": 105,
+      "title": "5% Off On Coffee",
+      "description": "We are happy to let you know that you are eligible for 10% off on any coffee drink. Please redeem your discount on your next visit",
+      "image_link": "https://media.gettyimages.com/photos/high-angle-view-of-coffee-cup-with-beans-and-coffee-on-wooden-table-picture-id1329723518?s=2048x2048"
+    }
+  ]
+}
