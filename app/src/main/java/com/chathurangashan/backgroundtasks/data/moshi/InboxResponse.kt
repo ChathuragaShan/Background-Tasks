@@ -6,7 +6,7 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class InboxResponse(
     @Json(name = "loyalty")
-    val loyalty: List<Message>,
+    val loyalty: List<MessageContent>,
     @Json(name = "offers")
-    val offers: List<Message>
+    val offers: List<MessageContent>
 )

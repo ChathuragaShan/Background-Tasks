@@ -1,13 +1,15 @@
 package com.chathurangashan.backgroundtasks.ui.screen
 
+import android.os.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Divider
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -17,7 +19,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import com.chathurangashan.backgroundtasks.data.moshi.InboxResponse
-import com.chathurangashan.backgroundtasks.data.moshi.Message
+import com.chathurangashan.backgroundtasks.data.moshi.MessageContent
 import com.chathurangashan.backgroundtasks.ui.theme.DescriptionTextColor
 import com.chathurangashan.backgroundtasks.ui.theme.DividerColor
 import com.chathurangashan.backgroundtasks.ui.theme.TitleTextColor
@@ -25,27 +27,75 @@ import com.chathurangashan.backgroundtasks.utilities.readJsonFileFromRawResource
 import com.squareup.moshi.Moshi
 import com.chathurangashan.backgroundtasks.ui.theme.Typography
 
+private const val INBOX_MESSAGES_BUNDLE_KEY = "MESSAGES_KEY"
+
 @Composable
 fun ThreadExampleScreen(navController: NavController = rememberNavController()) {
 
+    var loadingState by remember { mutableStateOf(true) }
+    val inboxMessagesState = remember { mutableStateListOf<MessageContent>() }
+
     val context = LocalContext.current
     val jsonDataString = context.readJsonFileFromRawResource("inbox_data_response")
-    val messages = prepareMessages(jsonDataString)
+
+    val handler = object : Handler(Looper.getMainLooper()) {
+
+        override fun handleMessage(msg: Message) {
+
+            val inboxMessages = if (Build.VERSION.SDK_INT >= 33) {
+                msg.data.getParcelableArrayList(
+                    INBOX_MESSAGES_BUNDLE_KEY,
+                    MessageContent::class.java
+                )
+            } else {
+                msg.data.getParcelableArrayList(INBOX_MESSAGES_BUNDLE_KEY)
+            }
+
+            inboxMessages?.let {
+                inboxMessagesState.addAll(it)
+                loadingState = false
+            }
+        }
+
+    }
+
+    val prepareMessageRunnable = Runnable {
+
+        val inboxMessages = prepareMessages(jsonDataString)
+
+        val bundle = Bundle()
+        bundle.putParcelableArrayList(INBOX_MESSAGES_BUNDLE_KEY, inboxMessages)
+
+        val message = handler.obtainMessage()
+        message.data = bundle
+
+        handler.sendMessage(message)
+    }
+
+    LaunchedEffect(key1 = inboxMessagesState){
+        val prepareMessageThread = Thread(prepareMessageRunnable)
+        prepareMessageThread.start()
+    }
 
     Box(
         modifier = Modifier
             .background(Color.White)
-            .fillMaxSize()
+            .fillMaxSize(),
     ) {
-        LazyColumn() {
-            itemsIndexed(messages) { index, item ->
-                InboxListItem(item)
-                if (index < messages.lastIndex)
-                    Divider(
-                        modifier = Modifier.padding(horizontal = 8.dp),
-                        color = DividerColor,
-                        thickness = 0.5.dp
-                    )
+        if (loadingState) {
+            CircularProgressIndicator(Modifier.align(Alignment.Center))
+        } else {
+            LazyColumn {
+                itemsIndexed(inboxMessagesState) { index, item ->
+                    InboxListItem(item)
+                    if (index < inboxMessagesState.lastIndex){
+                        Divider(
+                            modifier = Modifier.padding(horizontal = 8.dp),
+                            color = DividerColor,
+                            thickness = 0.5.dp
+                        )
+                    }
+                }
             }
         }
     }
@@ -54,7 +104,7 @@ fun ThreadExampleScreen(navController: NavController = rememberNavController()) 
 @Composable
 @Preview
 fun InboxListItem(
-    message: Message = Message(
+    message: MessageContent = MessageContent(
         1,
         "Sample Inbox message description",
         "http://sampleimage.png",
@@ -95,12 +145,12 @@ fun InboxListItem(
     }
 }
 
-fun prepareMessages(response: String): MutableList<Message> {
+fun prepareMessages(response: String): ArrayList<MessageContent> {
 
     val moshi = Moshi.Builder().build()
     val jsonAdapter = moshi.adapter(InboxResponse::class.java)
     val inboxResponse = jsonAdapter.fromJson(response)
-    val messages = mutableListOf<Message>()
+    val messages = arrayListOf<MessageContent>()
 
     inboxResponse?.apply {
 
@@ -109,6 +159,6 @@ fun prepareMessages(response: String): MutableList<Message> {
         messages.sortedBy { it.title }
 
     }
-
+    
     return messages
 }
