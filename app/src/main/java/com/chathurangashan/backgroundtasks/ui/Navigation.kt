@@ -4,8 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.chathurangashan.backgroundtasks.ui.screen.MainScreen
-import com.chathurangashan.backgroundtasks.ui.screen.ThreadExampleScreen
+import com.chathurangashan.backgroundtasks.ui.screen.*
 
 @Composable
 fun Navigation(){
@@ -16,6 +15,15 @@ fun Navigation(){
         }
         composable(route = Screen.ThreadExampleScreen.route){
             ThreadExampleScreen(navigationController)
+        }
+        composable(route = Screen.ServiceTypesScreen.route){
+            ServiceTypesScreen(navigationController)
+        }
+        composable(route = Screen.BackgroundServiceExampleScreen.route){
+            BackgroundServiceExampleScreen(navigationController)
+        }
+        composable(route = Screen.ForegroundServiceExampleScreen.route){
+            ForegroundServiceExampleScreen(navigationController)
         }
     }
 }

@@ -1,6 +1,5 @@
 package com.chathurangashan.backgroundtasks.ui.screen
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
@@ -21,11 +20,11 @@ import com.chathurangashan.backgroundtasks.ui.theme.Typography
 
 @Composable
 @Preview
-fun MainScreen (navController: NavController = rememberNavController()) {
+fun ServiceTypesScreen (navController: NavController = rememberNavController()){
     Box(
-        modifier = Modifier
-            .background(Color.White)
-            .fillMaxSize()
+    modifier = Modifier
+    .background(Color.White)
+    .fillMaxSize()
     ) {
         Column(
             modifier = Modifier
@@ -37,39 +36,39 @@ fun MainScreen (navController: NavController = rememberNavController()) {
             Text(
                 modifier = Modifier
                     .padding(bottom = 16.dp),
-                text = stringResource(R.string.background_tasks_main_title),
+                text = stringResource(R.string.service_type_main_title),
                 style = Typography.h1,
                 textAlign = TextAlign.Center
             )
             Button(
                 modifier = Modifier
                     .fillMaxWidth(),
-                onClick = { onClickThread(navController) },
+                onClick = { onClickBackgroundService(navController)  },
             ) {
-                Text( stringResource(R.string.thread_button_text) )
+                Text( stringResource(R.string.background_service_button_text) )
             }
             Button(
                 modifier = Modifier
                     .fillMaxWidth(),
-                onClick = { onClickService(navController) },
+                onClick = { onClickForegroundService(navController) },
             ) {
-                Text( stringResource(R.string.service_button_text) )
+                Text( stringResource(R.string.foreground_service_button_text) )
             }
             Button(
                 modifier = Modifier
                     .fillMaxWidth(),
                 onClick = {  },
             ) {
-                Text( stringResource(R.string.coroutine_button_text) )
+                Text( stringResource(R.string.bind_service_button_text) )
             }
         }
     }
 }
 
-fun onClickThread(navController: NavController){
-    navController.navigate(Screen.ThreadExampleScreen.route)
+fun onClickBackgroundService(navController: NavController){
+    navController.navigate(Screen.BackgroundServiceExampleScreen.route)
 }
 
-fun onClickService(navController: NavController){
-    navController.navigate(Screen.ServiceTypesScreen.route)
+fun onClickForegroundService(navController: NavController){
+    navController.navigate(Screen.ForegroundServiceExampleScreen.route)
 }

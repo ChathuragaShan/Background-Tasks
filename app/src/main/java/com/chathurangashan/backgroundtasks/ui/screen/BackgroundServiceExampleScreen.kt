@@ -1,14 +1,16 @@
 package com.chathurangashan.backgroundtasks.ui.screen
 
-import android.util.Log
+import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -16,12 +18,26 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.chathurangashan.backgroundtasks.R
-import com.chathurangashan.backgroundtasks.ui.Screen
+import com.chathurangashan.backgroundtasks.services.MusicPlayBackgroundService
 import com.chathurangashan.backgroundtasks.ui.theme.Typography
 
 @Composable
 @Preview
-fun MainScreen (navController: NavController = rememberNavController()) {
+fun BackgroundServiceExampleScreen(navController: NavController = rememberNavController()){
+
+    val context = LocalContext.current
+    val serviceIntent = Intent(context,MusicPlayBackgroundService::class.java)
+
+    LaunchedEffect(key1 = Unit){
+        context.startService(serviceIntent)
+    }
+
+    DisposableEffect(key1 = Unit){
+        onDispose {
+            context.stopService(serviceIntent)
+        }
+    }
+
     Box(
         modifier = Modifier
             .background(Color.White)
@@ -37,39 +53,10 @@ fun MainScreen (navController: NavController = rememberNavController()) {
             Text(
                 modifier = Modifier
                     .padding(bottom = 16.dp),
-                text = stringResource(R.string.background_tasks_main_title),
+                text = stringResource(R.string.background_music_title),
                 style = Typography.h1,
                 textAlign = TextAlign.Center
             )
-            Button(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                onClick = { onClickThread(navController) },
-            ) {
-                Text( stringResource(R.string.thread_button_text) )
-            }
-            Button(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                onClick = { onClickService(navController) },
-            ) {
-                Text( stringResource(R.string.service_button_text) )
-            }
-            Button(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                onClick = {  },
-            ) {
-                Text( stringResource(R.string.coroutine_button_text) )
-            }
         }
     }
-}
-
-fun onClickThread(navController: NavController){
-    navController.navigate(Screen.ThreadExampleScreen.route)
-}
-
-fun onClickService(navController: NavController){
-    navController.navigate(Screen.ServiceTypesScreen.route)
 }

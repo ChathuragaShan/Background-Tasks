@@ -2,5 +2,12 @@
     <string name="app_name">BackgroundTasks</string>
     <string name="background_tasks_main_title">Background task types</string>
     <string name="thread_button_text">Thread</string>
+    <string name="service_button_text">Service</string>
     <string name="coroutine_button_text">Coroutine</string>
+
+    <string name="service_type_main_title">Service types</string>
+    <string name="foreground_service_button_text">Foreground Service</string>
+    <string name="background_service_button_text">Background Service</string>
+    <string name="bind_service_button_text">Bind Services</string>
+    <string name="background_music_title">Music we be played automatically in background service.</string>
 </resources>
