@@ -5,6 +5,7 @@ import android.content.Intent
 import android.media.MediaPlayer
 import android.os.IBinder
 import com.chathurangashan.backgroundtasks.R
+import com.chathurangashan.backgroundtasks.ui.screen.ThreadExampleScreen
 
 class MusicPlayBackgroundService : Service() {
 

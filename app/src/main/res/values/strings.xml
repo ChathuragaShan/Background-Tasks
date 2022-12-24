@@ -10,4 +10,7 @@
     <string name="background_service_button_text">Background Service</string>
     <string name="bind_service_button_text">Bind Services</string>
     <string name="background_music_title">Music we be played automatically in background service.</string>
+    <string name="foreground_music_title">Music we be played automatically in foreground service.</string>
+    <string name="music_notification_title">Music Foreground Service</string>
+    <string name="music_notification_description">Playing sample track</string>
 </resources>

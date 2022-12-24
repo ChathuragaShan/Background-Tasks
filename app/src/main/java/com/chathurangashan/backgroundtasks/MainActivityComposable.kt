@@ -1,5 +1,6 @@
 package com.chathurangashan.backgroundtasks
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -10,15 +11,24 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import com.chathurangashan.backgroundtasks.services.MusicPlayForegroundService
 import com.chathurangashan.backgroundtasks.ui.Navigation
 import com.chathurangashan.backgroundtasks.ui.theme.BackgroundTasksTheme
 
 class MainActivityComposable : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             Navigation()
         }
+    }
+
+    override fun onDestroy() {
+        val serviceIntent = Intent(this, MusicPlayForegroundService::class.java)
+        stopService(serviceIntent)
+        super.onDestroy()
     }
 }
