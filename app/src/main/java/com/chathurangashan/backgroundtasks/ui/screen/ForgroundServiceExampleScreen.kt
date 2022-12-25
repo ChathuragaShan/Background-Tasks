@@ -28,7 +28,6 @@ fun ForegroundServiceExampleScreen(navController: NavController = rememberNavCon
     val context = LocalContext.current
     val serviceIntent = Intent(context, MusicPlayForegroundService::class.java)
 
-
     LaunchedEffect(key1 = Unit){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             context.applicationContext.startForegroundService(serviceIntent)

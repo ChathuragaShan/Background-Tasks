@@ -25,5 +25,8 @@ fun Navigation(){
         composable(route = Screen.ForegroundServiceExampleScreen.route){
             ForegroundServiceExampleScreen(navigationController)
         }
+        composable(route = Screen.ForegroundServiceExampleScreen.route){
+            BindServiceExampleScreen(navigationController)
+        }
     }
 }

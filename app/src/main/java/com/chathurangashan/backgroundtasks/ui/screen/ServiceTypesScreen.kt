@@ -57,7 +57,7 @@ fun ServiceTypesScreen (navController: NavController = rememberNavController()){
             Button(
                 modifier = Modifier
                     .fillMaxWidth(),
-                onClick = {  },
+                onClick = { onClickBindService(navController) },
             ) {
                 Text( stringResource(R.string.bind_service_button_text) )
             }
@@ -70,5 +70,9 @@ fun onClickBackgroundService(navController: NavController){
 }
 
 fun onClickForegroundService(navController: NavController){
+    navController.navigate(Screen.ForegroundServiceExampleScreen.route)
+}
+
+fun onClickBindService(navController: NavController){
     navController.navigate(Screen.ForegroundServiceExampleScreen.route)
 }
