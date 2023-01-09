@@ -65,13 +65,26 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
 
+    //Coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
+
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+
     // Moshi
     implementation "com.squareup.moshi:moshi:1.13.0"
     implementation "com.squareup.moshi:moshi-kotlin:1.13.0"
+    implementation "com.squareup.retrofit2:converter-moshi:2.9.0"
     kapt "com.squareup.moshi:moshi-kotlin-codegen:1.13.0"
+
+    //OKhttp 3
+    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
 
     // Coil
     implementation"io.coil-kt:coil-compose:2.2.2"
+
+    //WorkManager
+    implementation 'androidx.work:work-runtime-ktx:2.7.1'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

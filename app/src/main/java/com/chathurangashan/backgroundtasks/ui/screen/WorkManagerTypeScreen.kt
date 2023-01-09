@@ -1,6 +1,5 @@
 package com.chathurangashan.backgroundtasks.ui.screen
 
-import android.app.Activity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
@@ -9,7 +8,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,11 +20,7 @@ import com.chathurangashan.backgroundtasks.ui.theme.Typography
 
 @Composable
 @Preview
-fun MainScreen (navController: NavController = rememberNavController()) {
-
-    val context = LocalContext.current
-    val activity = context as Activity
-
+fun WorkManagerTypeScreen (navController: NavController = rememberNavController()){
     Box(
         modifier = Modifier
             .background(Color.White)
@@ -42,50 +36,35 @@ fun MainScreen (navController: NavController = rememberNavController()) {
             Text(
                 modifier = Modifier
                     .padding(bottom = 16.dp),
-                text = stringResource(R.string.background_tasks_main_title),
+                text = stringResource(R.string.work_manger_title),
                 style = Typography.h1,
                 textAlign = TextAlign.Center
             )
             Button(
                 modifier = Modifier
                     .fillMaxWidth(),
-                onClick = { onClickThread(navController) },
+                onClick = { onClickOneTimeImmediateWork(navController) },
             ) {
-                Text( stringResource(R.string.thread_button_text) )
+                Text( stringResource(R.string.one_time_immediate_work_button_text) )
             }
             Button(
                 modifier = Modifier
                     .fillMaxWidth(),
-                onClick = { onClickService(navController) },
+                onClick = { },
             ) {
-                Text( stringResource(R.string.service_button_text) )
+                Text( stringResource(R.string.periodic_work_button_text) )
             }
             Button(
                 modifier = Modifier
                     .fillMaxWidth(),
-                onClick = {  activity.finish() },
+                onClick = {  },
             ) {
-                Text( stringResource(R.string.coroutine_button_text) )
-            }
-            Button(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                onClick = {  onClickWorkManager(navController) },
-            ) {
-                Text( stringResource(R.string.work_manager_button_text) )
+                Text( stringResource(R.string.long_running_work_button_text) )
             }
         }
     }
 }
 
-fun onClickThread(navController: NavController){
-    navController.navigate(Screen.ThreadExampleScreen.route)
-}
-
-fun onClickService(navController: NavController){
-    navController.navigate(Screen.ServiceTypesScreen.route)
-}
-
-fun onClickWorkManager(navController: NavController){
-    navController.navigate(Screen.WorkManagerTypeScreen.route)
+fun onClickOneTimeImmediateWork(navController: NavController){
+    navController.navigate(Screen.OneTimeImmediateWorkManagerExampleScreen.route)
 }

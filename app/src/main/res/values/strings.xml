@@ -4,6 +4,7 @@
     <string name="thread_button_text">Thread</string>
     <string name="service_button_text">Service</string>
     <string name="coroutine_button_text">Coroutine</string>
+    <string name="work_manager_button_text">WorkManager</string>
 
     <string name="service_type_main_title">Service types</string>
     <string name="foreground_service_button_text">Foreground Service</string>
@@ -16,4 +17,10 @@
     <string name="bind_service_music_title">Music will be played in bound service.</string>
     <string name="music_start_button_text">Start</string>
     <string name="music_stop_button_text">Stop</string>
+    <string name="work_manger_title">WorkManager types</string>
+    <string name="one_time_immediate_work_button_text">One Time Immediate Work</string>
+    <string name="periodic_work_button_text">Periodic Immediate Work</string>
+    <string name="long_running_work_button_text">Long Running Work</string>
+    <string name="work_manager_image_download_button_text">Image is downloading using WorkManager.</string>
+    <string name="image_download_success_message">Image is successfully downloaded.</string>
 </resources>
