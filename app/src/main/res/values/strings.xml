@@ -23,4 +23,11 @@
     <string name="long_running_work_button_text">Long Running Work</string>
     <string name="work_manager_image_download_button_text">Image is downloading using WorkManager.</string>
     <string name="image_download_success_message">Image is successfully downloaded.</string>
+    <string name="insert_delivery_recode_title">Insert delivery recode</string>
+    <string name="address_edit_text_label">Address</string>
+    <string name="nic_text_label">NIC</string>
+    <string name="drop_off_type_label">Drop Off Type</string>
+    <string name="save_button_text">Save</string>
+    <string name="video_download_success_message">Video is successfully downloaded.</string>
+    <string name="work_manager_video_download_button_text">Video is downloading using WorkManager.</string>
 </resources>

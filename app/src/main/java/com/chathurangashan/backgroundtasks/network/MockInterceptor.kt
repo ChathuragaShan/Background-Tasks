@@ -3,6 +3,8 @@ package com.chathurangashan.backgroundtasks.network
 import android.content.Context
 import android.content.SharedPreferences
 import com.chathurangashan.backgroundtasks.R
+import com.chathurangashan.backgroundtasks.data.moshi.DeliveryRecodeRequest
+import com.chathurangashan.backgroundtasks.data.moshi.DeliveryRecodeResponse
 import com.squareup.moshi.Moshi
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
@@ -25,9 +27,15 @@ class MockInterceptor (val context: Context,val sharedPreferences: SharedPrefere
         val request = chain.request()
         val url = request.url.toString()
 
-        if (url.contains("images/download/")) {
+        if (url.contains("download/image/")) {
             val image = request.url.pathSegments[4]
             return processDownloadImageResponse(request,image)
+        }else if(url.endsWith("backup/work_history")){
+            val loginRequestBody = getRequestBody<List<DeliveryRecodeRequest>>(request)
+            return processDeliveryRecodeResponse(request,loginRequestBody)
+        }else if(url.contains("download/video/")){
+            val image = request.url.pathSegments[4]
+            return processDownloadVideoResponse(request,image)
         }
 
         return chain.proceed(request)
@@ -58,6 +66,66 @@ class MockInterceptor (val context: Context,val sharedPreferences: SharedPrefere
                 .build()
         }
     }
+
+    private fun processDownloadVideoResponse(request: Request, video: String): Response{
+
+        if(video == "short_film"){
+
+            val imageStream: InputStream = context.resources.openRawResource(R.raw.wallpaper)
+
+            return Response.Builder()
+                .code(200)
+                .request(request)
+                .protocol(Protocol.HTTP_1_1)
+                .message("Success")
+                .body(imageStream.readBytes().toResponseBody("image/jpg".toMediaType()))
+                .build()
+
+        }else{
+
+            return Response.Builder()
+                .code(200)
+                .request(request)
+                .protocol(Protocol.HTTP_1_1)
+                .message("Image not found")
+                .body(null)
+                .build()
+        }
+    }
+
+    private fun processDeliveryRecodeResponse(request: Request, deliveryRecodeRequest: List<DeliveryRecodeRequest>): Response {
+
+        val moshi = Moshi.Builder().build()
+        val jsonAdapter = moshi.adapter(DeliveryRecodeResponse::class.java)
+
+        if(deliveryRecodeRequest.isNotEmpty()){
+
+            val deliveryRecodeResponse = DeliveryRecodeResponse(true, "data sync is successful")
+
+            return Response.Builder()
+                .code(200)
+                .request(request)
+                .protocol(Protocol.HTTP_1_1)
+                .message("Success")
+                .body(jsonAdapter.toJson(deliveryRecodeResponse)
+                    .toResponseBody("application/json".toMediaType()))
+                .build()
+
+        }else{
+
+            val deliveryRecodeResponse = DeliveryRecodeResponse(false, "Invalid data")
+
+            return Response.Builder()
+                .code(200)
+                .request(request)
+                .protocol(Protocol.HTTP_1_1)
+                .message("Input Field Error")
+                .body(jsonAdapter.toJson(deliveryRecodeResponse)
+                    .toResponseBody("application/json".toMediaType()))
+                .build()
+        }
+    }
+
     /**
      * responsible for getting the request body as a moshi object
      *

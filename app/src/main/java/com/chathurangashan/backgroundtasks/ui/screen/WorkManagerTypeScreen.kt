@@ -50,14 +50,14 @@ fun WorkManagerTypeScreen (navController: NavController = rememberNavController(
             Button(
                 modifier = Modifier
                     .fillMaxWidth(),
-                onClick = { },
+                onClick = { onClickPeriodWork(navController) },
             ) {
                 Text( stringResource(R.string.periodic_work_button_text) )
             }
             Button(
                 modifier = Modifier
                     .fillMaxWidth(),
-                onClick = {  },
+                onClick = { onClickLongRunningWork(navController) },
             ) {
                 Text( stringResource(R.string.long_running_work_button_text) )
             }
@@ -67,4 +67,12 @@ fun WorkManagerTypeScreen (navController: NavController = rememberNavController(
 
 fun onClickOneTimeImmediateWork(navController: NavController){
     navController.navigate(Screen.OneTimeImmediateWorkManagerExampleScreen.route)
+}
+
+fun onClickPeriodWork(navController: NavController){
+    navController.navigate(Screen.PeriodicWorkManagerExampleScreen.route)
+}
+
+fun onClickLongRunningWork(navController: NavController){
+    navController.navigate(Screen.LongRunningWorkManagerExampleScreen.route)
 }

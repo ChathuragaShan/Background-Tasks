@@ -9,14 +9,15 @@ import com.chathurangashan.backgroundtasks.ThisApplication
 import com.chathurangashan.backgroundtasks.data.general.DownloadState
 import com.chathurangashan.backgroundtasks.network.ApiService
 import com.chathurangashan.backgroundtasks.network.ConnectivityInterceptor
-import kotlinx.coroutines.delay
-import retrofit2.HttpException
-import java.io.*
-import java.net.SocketTimeoutException
 import com.chathurangashan.backgroundtasks.utilities.saveFile
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
+import retrofit2.HttpException
+import java.io.File
+import java.io.IOException
+import java.net.SocketTimeoutException
 
-class ImageDownloadWorker(appContext: Context, workerParams: WorkerParameters): CoroutineWorker(appContext, workerParams) {
+class VideoDownloadWorker (appContext: Context, workerParams: WorkerParameters): CoroutineWorker(appContext, workerParams)  {
 
     private val thisApplication = appContext as ThisApplication
     private lateinit var fileDownloadState: Result
@@ -25,26 +26,26 @@ class ImageDownloadWorker(appContext: Context, workerParams: WorkerParameters): 
 
         val networkService by lazy { thisApplication.networkService }
         val imageURl =
-            inputData.getString(IMAGE_NAME) ?: return@coroutineScope Result.failure()
-        downloadImage(networkService,imageURl)
+            inputData.getString(VIDEO_NAME) ?: return@coroutineScope Result.failure()
+        downloadVideo(networkService,imageURl)
 
         return@coroutineScope fileDownloadState
 
     }
 
-    private suspend fun downloadImage(networkService: ApiService, imageFileName: String) {
+    private suspend fun downloadVideo (networkService: ApiService, videoFileName: String) {
 
         try {
 
             val filePath = File(
                 thisApplication.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS),
-                File.separator.toString() + "$imageFileName.jpg"
+                File.separator.toString() + "$videoFileName.mp4"
             ).toString()
 
-            networkService.downloadImage(imageFileName).saveFile(filePath)
-                .collect {
+            networkService.downloadVideo(videoFileName).saveFile(filePath)
+                .collect{
 
-                    fileDownloadState = when (it) {
+                    fileDownloadState = when(it){
                         is DownloadState.Downloading -> {
                             delay(250L)
                             setProgress(workDataOf(
@@ -69,7 +70,7 @@ class ImageDownloadWorker(appContext: Context, workerParams: WorkerParameters): 
                         else -> {
                             Result.failure(
                                 workDataOf(
-                                    ERROR_MESSAGE to "UnKnown Error"
+                                ERROR_MESSAGE to "UnKnown Error"
                                 )
                             )
                         }
@@ -96,8 +97,7 @@ class ImageDownloadWorker(appContext: Context, workerParams: WorkerParameters): 
     companion object {
         const val DOWNLOAD_PROGRESS = "DOWNLOAD_PROGRESS"
         const val DOWNLOADED_FILE_NAME = "DOWNLOADED_FILE_NAME"
-        const val IMAGE_NAME = "IMAGE_NAME"
+        const val VIDEO_NAME = "VIDEO_NAME"
         const val ERROR_MESSAGE = "ERROR_MESSAGE"
     }
-
 }

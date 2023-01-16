@@ -34,5 +34,11 @@ fun Navigation(){
         composable(route = Screen.OneTimeImmediateWorkManagerExampleScreen.route){
             OneTimeWorkManagerExampleScreen(navigationController)
         }
+        composable(route = Screen.PeriodicWorkManagerExampleScreen.route){
+            PeriodicWorkManagerExampleScreen(navigationController)
+        }
+        composable(route = Screen.LongRunningWorkManagerExampleScreen.route){
+            LongRunningWorkManagerExampleScreen(navigationController)
+        }
     }
 }

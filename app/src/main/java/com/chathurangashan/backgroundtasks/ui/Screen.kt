@@ -9,4 +9,6 @@ sealed class Screen(val route: String) {
     object BindServiceExampleScreen: Screen("bind_service_example")
     object WorkManagerTypeScreen: Screen("work_manager_example")
     object OneTimeImmediateWorkManagerExampleScreen: Screen("one_time_immediate_example")
+    object PeriodicWorkManagerExampleScreen: Screen("periodic_work_manager_example")
+    object LongRunningWorkManagerExampleScreen: Screen("long_running_work_manager_example")
 }
