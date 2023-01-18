@@ -30,4 +30,7 @@
     <string name="save_button_text">Save</string>
     <string name="video_download_success_message">Video is successfully downloaded.</string>
     <string name="work_manager_video_download_button_text">Video is downloading using WorkManager.</string>
+    <string name="video_download_notification_title">Video Download Work Manager</string>
+    <string name="video_download_description">Downloading a video track</string>
+    <string name="video_download_cancel">Cancel</string>
 </resources>

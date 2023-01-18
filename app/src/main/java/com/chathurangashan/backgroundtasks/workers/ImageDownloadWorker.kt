@@ -24,9 +24,9 @@ class ImageDownloadWorker(appContext: Context, workerParams: WorkerParameters): 
     override suspend fun doWork(): Result = coroutineScope {
 
         val networkService by lazy { thisApplication.networkService }
-        val imageURl =
+        val imageFileName =
             inputData.getString(IMAGE_NAME) ?: return@coroutineScope Result.failure()
-        downloadImage(networkService,imageURl)
+        downloadImage(networkService,imageFileName)
 
         return@coroutineScope fileDownloadState
 

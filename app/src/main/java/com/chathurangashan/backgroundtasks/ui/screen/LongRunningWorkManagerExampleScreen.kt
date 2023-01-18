@@ -26,6 +26,7 @@ import androidx.work.workDataOf
 import com.chathurangashan.backgroundtasks.R
 import com.chathurangashan.backgroundtasks.ui.theme.Typography
 import com.chathurangashan.backgroundtasks.workers.ImageDownloadWorker
+import com.chathurangashan.backgroundtasks.workers.VideoDownloadWorker
 
 private const val TAG = "LongRunningWorkManagerExampleScreen"
 
@@ -44,10 +45,10 @@ fun LongRunningWorkManagerExampleScreen(navController: NavController = rememberN
 
     LaunchedEffect(key1 = Unit) {
 
-        val uploadWorkRequest = OneTimeWorkRequestBuilder<ImageDownloadWorker>()
+        val uploadWorkRequest = OneTimeWorkRequestBuilder<VideoDownloadWorker>()
             .setInputData(
                 workDataOf(
-                    ImageDownloadWorker.IMAGE_NAME to "short_film"
+                    VideoDownloadWorker.VIDEO_NAME to "short_film"
                 )
             )
             .build()
