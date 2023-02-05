@@ -28,7 +28,7 @@ class VideoDownloadWorker (appContext: Context, workerParams: WorkerParameters):
     private val thisApplication = appContext as ThisApplication
     private lateinit var fileDownloadState: Result
     private lateinit var notification: Notification
-    private val notificationManager by lazy { thisApplication.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager }
+    private val notificationManager by lazy { appContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager }
 
     override suspend fun doWork(): Result = coroutineScope {
 
@@ -124,9 +124,9 @@ class VideoDownloadWorker (appContext: Context, workerParams: WorkerParameters):
             )
             notificationChannel.description = "This is video download notification"
             notificationManager.createNotificationChannel(notificationChannel)
-            notificationManager.notify(VIDEO_DOWNLOAD_NOTIFICATION_ID, notification)
         }
 
+        notificationManager.notify(VIDEO_DOWNLOAD_NOTIFICATION_ID, notification)
         return ForegroundInfo(VIDEO_DOWNLOAD_NOTIFICATION_ID, notification)
     }
 

@@ -37,9 +37,9 @@ class MusicPlayForegroundService : Service() {
             )
             notificationChannel.description = "This is music play notification"
             notificationManager.createNotificationChannel(notificationChannel)
-            notificationManager.notify(MUSIC_PLAY_NOTIFICATION_ID, notification)
         }
 
+        notificationManager.notify(MUSIC_PLAY_NOTIFICATION_ID, notification)
         startForeground(MUSIC_PLAY_NOTIFICATION_ID, notification)
 
     }

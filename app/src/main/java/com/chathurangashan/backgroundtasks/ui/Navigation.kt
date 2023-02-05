@@ -40,5 +40,8 @@ fun Navigation(){
         composable(route = Screen.LongRunningWorkManagerExampleScreen.route){
             LongRunningWorkManagerExampleScreen(navigationController)
         }
+        composable(route = Screen.AlarmManagerExampleScreen.route){
+            AlarmManagerExampleScreen(navigationController)
+        }
     }
 }

@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.activity:activity-compose:1.6.1@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/ad01c6dfd5d3ef8111bcecebeece3c6c/transformed/activity-compose-1.6.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/ad01c6dfd5d3ef8111bcecebeece3c6c/transformed/activity-compose-1.6.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/ad01c6dfd5d3ef8111bcecebeece3c6c/transformed/activity-compose-1.6.1/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/d230a3e4e4d5fc3fd5f5f960f5757348/transformed/activity-compose-1.6.1/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/d230a3e4e4d5fc3fd5f5f960f5757348/transformed/activity-compose-1.6.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/d230a3e4e4d5fc3fd5f5f960f5757348/transformed/activity-compose-1.6.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

@@ -74,6 +74,13 @@ fun MainScreen (navController: NavController = rememberNavController()) {
             ) {
                 Text( stringResource(R.string.work_manager_button_text) )
             }
+            Button(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                onClick = {  onClickAlarmManager(navController) },
+            ) {
+                Text( stringResource(R.string.alarm_button_text) )
+            }
         }
     }
 }
@@ -88,4 +95,8 @@ fun onClickService(navController: NavController){
 
 fun onClickWorkManager(navController: NavController){
     navController.navigate(Screen.WorkManagerTypeScreen.route)
+}
+
+fun onClickAlarmManager(navController: NavController){
+    navController.navigate(Screen.AlarmManagerExampleScreen.route)
 }

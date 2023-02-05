@@ -5,6 +5,7 @@
     <string name="service_button_text">Service</string>
     <string name="coroutine_button_text">Coroutine</string>
     <string name="work_manager_button_text">WorkManager</string>
+    <string name="alarm_button_text">AlarmManager</string>
 
     <string name="service_type_main_title">Service types</string>
     <string name="foreground_service_button_text">Foreground Service</string>
@@ -33,4 +34,9 @@
     <string name="video_download_notification_title">Video Download Work Manager</string>
     <string name="video_download_description">Downloading a video track</string>
     <string name="video_download_cancel">Cancel</string>
+    <string name="alarm_manager_screen_title_text">Notify me to take medicine at</string>
+    <string name="time_picker_hint">Select time</string>
+    <string name="open_time_picker_button_text">Select</string>
+    <string name="medicine_reminder_notification_title">Medicine time</string>
+    <string name="medicine_reminder_notification_description">It\'s time to take your medicine</string>
 </resources>
