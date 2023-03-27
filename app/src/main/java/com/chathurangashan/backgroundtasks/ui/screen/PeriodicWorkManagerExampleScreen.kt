@@ -123,7 +123,7 @@ fun PeriodicWorkManagerExampleScreen(navController: NavController = rememberNavC
 
         val dataBackupWorkRequest =
             PeriodicWorkRequestBuilder<DataBackupWorker>(
-                1, TimeUnit.HOURS, 15, TimeUnit.HOURS)
+                1, TimeUnit.HOURS, 15, TimeUnit.MINUTES)
                 .setConstraints(constraints)
                 .build()
 
