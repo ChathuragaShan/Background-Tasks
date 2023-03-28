@@ -16,6 +16,9 @@ class AlarmManagerTrigger: BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
 
+        val sharedPreferences = context
+            .getSharedPreferences("com.chathurangashan.backgroundtasks",Context.MODE_PRIVATE)
+
         val notificationManager = getSystemService(context, NotificationManager::class.java)
 
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)
@@ -35,6 +38,11 @@ class AlarmManagerTrigger: BroadcastReceiver() {
         }
 
         notificationManager?.notify(ALARM_MANAGER_NOTIFICATION_ID, notification)
+
+        with (sharedPreferences.edit()) {
+            remove(context.getString(R.string.alarm_manger_reminder_time))
+            apply()
+        }
     }
 
 }

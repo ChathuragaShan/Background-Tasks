@@ -39,4 +39,5 @@
     <string name="open_time_picker_button_text">Select</string>
     <string name="medicine_reminder_notification_title">Medicine time</string>
     <string name="medicine_reminder_notification_description">It\'s time to take your medicine</string>
+    <string name="alarm_manger_reminder_time">Reminder Time</string>
 </resources>

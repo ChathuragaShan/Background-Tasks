@@ -37,7 +37,6 @@ import java.time.format.DateTimeFormatter
 fun AlarmManagerExampleScreen(navController: NavController = rememberNavController()) {
 
     val context = LocalContext.current
-    val focusManager = LocalFocusManager.current
     val focusRequester = remember { FocusRequester() }
 
     var selectedPickupTimeFieldValue by remember { mutableStateOf(LocalDateTime.now()) }
@@ -121,7 +120,7 @@ fun AlarmManagerExampleScreen(navController: NavController = rememberNavControll
             Button(
                 modifier = Modifier
                     .fillMaxWidth(),
-                onClick = { onClickSave(context, selectedPickupTimeFieldValue) },
+                onClick = { onClickSave(context, navController,selectedPickupTimeFieldValue) },
             ) {
                 Text(stringResource(R.string.save_button_text))
             }
@@ -129,8 +128,14 @@ fun AlarmManagerExampleScreen(navController: NavController = rememberNavControll
     }
 }
 
-fun onClickSave(context: Context, selectedLocalDateTime: LocalDateTime) {
+fun onClickSave(
+    context: Context,
+    navController: NavController,
+    selectedLocalDateTime: LocalDateTime
+) {
 
+    val sharedPreferences = context
+        .getSharedPreferences("com.chathurangashan.backgroundtasks",Context.MODE_PRIVATE)
     val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
     val intent = Intent(context, AlarmManagerTrigger::class.java)
     val pending = PendingIntent.getBroadcast(
@@ -141,7 +146,15 @@ fun onClickSave(context: Context, selectedLocalDateTime: LocalDateTime) {
     )
 
     val milliseconds = selectedLocalDateTime.atZone(ZoneId.systemDefault()).toEpochSecond() * 1000
+
+    with (sharedPreferences.edit()) {
+        putLong(context.getString(R.string.alarm_manger_reminder_time), milliseconds)
+        apply()
+    }
+
     alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, milliseconds, pending)
+
+    navController.navigateUp()
 }
 
 
