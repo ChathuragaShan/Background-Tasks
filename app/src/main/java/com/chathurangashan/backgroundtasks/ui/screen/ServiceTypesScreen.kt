@@ -74,5 +74,5 @@ fun onClickForegroundService(navController: NavController){
 }
 
 fun onClickBindService(navController: NavController){
-    navController.navigate(Screen.ForegroundServiceExampleScreen.route)
+    navController.navigate(Screen.BindServiceExampleScreen.route)
 }
