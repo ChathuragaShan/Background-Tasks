@@ -19,10 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkInfo
-import androidx.work.WorkManager
-import androidx.work.workDataOf
+import androidx.work.*
 import com.chathurangashan.backgroundtasks.R
 import com.chathurangashan.backgroundtasks.ui.theme.Typography
 import com.chathurangashan.backgroundtasks.workers.ImageDownloadWorker
@@ -51,6 +48,7 @@ fun LongRunningWorkManagerExampleScreen(navController: NavController = rememberN
                     VideoDownloadWorker.VIDEO_NAME to "short_film"
                 )
             )
+            .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
             .build()
 
         val workManager = WorkManager.getInstance(context.applicationContext)
