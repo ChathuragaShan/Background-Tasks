@@ -156,7 +156,7 @@ fun prepareMessages(response: String): ArrayList<MessageContent> {
 
         messages.addAll(offers)
         messages.addAll(loyalty)
-        return messages.sortedBy { it.title } as ArrayList<MessageContent>
+        return ArrayList(messages.sortedBy { it.title })
 
     }
     
