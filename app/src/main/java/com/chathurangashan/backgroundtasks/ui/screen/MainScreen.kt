@@ -1,6 +1,5 @@
 package com.chathurangashan.backgroundtasks.ui.screen
 
-import android.app.Activity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
@@ -9,7 +8,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -23,9 +21,6 @@ import com.chathurangashan.backgroundtasks.ui.theme.Typography
 @Composable
 @Preview
 fun MainScreen (navController: NavController = rememberNavController()) {
-
-    val context = LocalContext.current
-    val activity = context as Activity
 
     Box(
         modifier = Modifier
@@ -59,13 +54,6 @@ fun MainScreen (navController: NavController = rememberNavController()) {
                 onClick = { onClickService(navController) },
             ) {
                 Text( stringResource(R.string.service_button_text) )
-            }
-            Button(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                onClick = {  activity.finish() },
-            ) {
-                Text( stringResource(R.string.coroutine_button_text) )
             }
             Button(
                 modifier = Modifier
